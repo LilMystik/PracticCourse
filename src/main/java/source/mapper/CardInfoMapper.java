@@ -15,6 +15,7 @@ public interface CardInfoMapper {
 
   @Mapping(source = "userId", target = "user.id")
   CardInfo toEntity(CardInfoDto dto);
+
   @Mapping(source = "userId", target = "user.id")
   CardInfo toEntity(CardInfoCreateDto dto);
   List<CardInfoDto> toDtoList(List<CardInfo> cards);

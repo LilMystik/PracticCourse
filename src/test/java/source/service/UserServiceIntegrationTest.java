@@ -3,7 +3,7 @@ package source.service;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import source.config.TestContainersConfig;
+import source.service.config.TestContainersConfig;
 import source.entity.User;
 import source.repository.UserRepository;
 
