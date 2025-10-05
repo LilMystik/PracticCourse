@@ -6,8 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class UserDto {
-  private Long id;
+public class UserCreateDto {
 
   @NotBlank(message = "Name is required")
   private String name;
@@ -15,12 +14,12 @@ public class UserDto {
   @NotBlank(message = "Surname is required")
   private String surname;
 
-  @Past(message = "It's suuposed to be in the past")
+  @Past(message = "Birth date must be in the past")
   private LocalDate birthDate;
 
-  @Email(message = "Incorrect email")
+  @Email(message = "Invalid email format")
   @NotBlank(message = "Email is required")
   private String email;
 
-  private List<CardInfoDto> cards;
+  private List<CardInfoCreateDto> cards;
 }

@@ -1,6 +1,7 @@
 package source.mapper;
 
 import org.mapstruct.*;
+import source.dto.CardInfoCreateDto;
 import source.dto.CardInfoDto;
 import source.entity.CardInfo;
 
@@ -14,7 +15,8 @@ public interface CardInfoMapper {
 
   @Mapping(source = "userId", target = "user.id")
   CardInfo toEntity(CardInfoDto dto);
-
+  @Mapping(source = "userId", target = "user.id")
+  CardInfo toEntity(CardInfoCreateDto dto);
   List<CardInfoDto> toDtoList(List<CardInfo> cards);
 }
 

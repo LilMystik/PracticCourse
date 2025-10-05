@@ -1,14 +1,9 @@
 package source.service;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
+import source.config.TestContainersConfig;
 import source.entity.User;
 import source.repository.UserRepository;
 
@@ -16,18 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootTest
-@Testcontainers
-class UserServiceIntegrationTest {
-
-  @Container
-  public static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15")
-          .withDatabaseName("testdb")
-          .withUsername("user")
-          .withPassword("pass");
-
-  @Container
-  public static GenericContainer<?> redis = new GenericContainer<>("redis:7")
-          .withExposedPorts(6379);
+class UserServiceIntegrationTest extends TestContainersConfig {
 
   @Autowired
   private UserService userService;
@@ -67,7 +51,6 @@ class UserServiceIntegrationTest {
     User saved = userService.create(user);
 
     User fetched1 = userService.getById(saved.getId());
-
     User fetched2 = userService.getById(saved.getId());
 
     Assertions.assertEquals(fetched1.getId(), fetched2.getId());
