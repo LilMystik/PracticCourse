@@ -31,8 +31,25 @@ services:
       SPRING_DATASOURCE_PASSWORD: FayeValentine3002
       SPRING_REDIS_HOST: redis
       SPRING_REDIS_PORT: 6379
+      JWT_SECRET: "super_secret_key_123"
     ports:
       - "8080:8080"
+
+  auth-service:
+    build: ./auth_service
+    container_name: auth_service
+    depends_on:
+      - postgres-auth
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-auth:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: FayeValentine3002
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_PROFILES_ACTIVE: prod
+      USER_SERVICE_URL: http://user-service:8080/api/v1/users
+      JWT_SECRET: "super_secret_key_123"
+    ports:
+      - "8081:8081"
 
 volumes:
   pgdata:
